@@ -39,6 +39,24 @@ Papers that use this dataset:
 
 For setting up your project, [download](https://archive.ics.uci.edu/dataset/401/gene+expression+cancer+rna+seq) the data, then move the `data.csv` and `labels.csv` into the `data` directory.
 
-### 6. Project Goals: What you hope to achieve, or what findings you expect with your project.
+### 6. Project Goals: What you hope to achieve, or what findings do you expect with your project.
 
-TODO
+Our goal as a team is to get as high a classification accuracy as possible on a high-feature, low sample dataset. 
+
+Area under the curve 
+Precision
+Accuracy
+F1
+
+With the significant difference between feature count and sample size, we expect to conduct various dimensionality reduction techniques preceding the modeling step. 
+
+These techniques include principle-component analysis and clustering. 
+
+
+
+with a variety of model types and architectures.
+
+With the high number of features, each model will be further evaluated on feature 
+
+
+
