@@ -1,5 +1,12 @@
 # Data Science (MSAI339) Main Project
 
+A project to predict types of cancers associated with genomic data. 
+
+## Project Layout:
+- The `data` directory includes all scripts for exploring and preprocessing the data. 
+- The `models` directory hosts all model implementations.
+- The `experiments` directory is for the evaluation and interpretation of a specific model. 
+
 ## Group Formation & Proposal
 
 ### 1. Team Name: *K-Mean Girls*
