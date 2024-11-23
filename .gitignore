@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 data
+data.parquet
+labels.parquet
