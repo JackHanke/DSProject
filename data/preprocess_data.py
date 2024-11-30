@@ -5,25 +5,6 @@ from typing import Literal, Union
 from sklearn.preprocessing import MinMaxScaler, LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 
-
-class PreprocessingPipeline:
-    def __init__(self):
-        self.label_encoder = LabelEncoder()
-        self.scaler = MinMaxScaler()
-    
-    def fit(self, X: pd.DataFrame, y: pd.DataFrame) -> None:
-        self.scaler.fit(X)
-        self.label_encoder.fit(y=y)
-
-    def transform(self, X: pd.DataFrame, y: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
-        X_transformed = self.scaler.transform(X)
-        y_transformed = self.label_encoder.transform(y)
-        return X_transformed, y_transformed
-    
-    def inverse_transform(self, X: pd.DataFrame, y: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
-        return self.scaler.inverse_transform(X), self.label_encoder.inverse_transform(y)
-
-
 def get_raw_data():
     data, labels = pd.read_parquet('./data/data.parquet'), pd.read_parquet('./data/labels.parquet')
     data, labels = data.drop(columns = 'Unnamed: 0'), labels.drop(columns = 'Unnamed: 0')
@@ -32,33 +13,45 @@ def get_raw_data():
     X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
     return [X_train, y_train, X_val, y_val, X_test, y_test]
 
-
 class RawData:
     def __init__(self):
         self.name = 'Raw Data'
-        col = get_raw_data()
+        data = get_raw_data()
 
-        self.X_train = col[0]
-        self.y_train = col[1]
-        self.X_val = col[2]
-        self.y_val = col[3]
-        self.X_test = col[4]
-        self.y_test = col[5]
+        self.X_train = data[0]
+        self.y_train = data[1]
+        self.X_val = data[2]
+        self.y_val = data[3]
+        self.X_test = data[4]
+        self.y_test = data[5]
 
     def get_data(self):
         return [self.X_train, self.y_train, self.X_val, self.y_val, self.X_test, self.y_test]
 
-# TODO make different type of preprocessor classes
-
 class MinMaxScaledData(RawData):
     def __init__(self):
-        pass
-
+        # super(MinMaxScaledData, self).__init__()
+        super().__init__()
+        self.name = 'MinMax Scaled Data'
+        self.scaler = MinMaxScaler()
+        # scale 
+        self.scaler.fit(self.X_train)
+        self.X_train = self.scaler.transform(self.X_train)
+        self.X_val = self.scaler.transform(self.X_val)
+        self.X_test = self.scaler.transform(self.X_test)
 
 class StandardScaledData(RawData):
     def __init__(self):
-        pass
+        super().__init__()
+        self.name = 'Standard Scaled Data'
+        self.scaler = StandardScaler()
+        # scale 
+        self.scaler.fit(self.X_train)
+        self.X_train = self.scaler.transform(self.X_train)
+        self.X_val = self.scaler.transform(self.X_val)
+        self.X_test = self.scaler.transform(self.X_test)
 
+# TODO make different type of preprocessor classes
 
 class ShapleyReducedData(RawData):
     def __init__(self, k):
@@ -67,7 +60,7 @@ class ShapleyReducedData(RawData):
 
 class FeatureImportanceReducedData(RawData):
     def __init__(self, k):
-            pass
+        pass
 
 
 class PCAedData(RawData):
