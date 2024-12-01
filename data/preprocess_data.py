@@ -8,9 +8,9 @@ from sklearn.model_selection import train_test_split
 def get_raw_data():
     data, labels = pd.read_parquet('./data/data.parquet'), pd.read_parquet('./data/labels.parquet')
     data, labels = data.drop(columns = 'Unnamed: 0'), labels.drop(columns = 'Unnamed: 0')
-    # splits data to train 60%, val 20%, test 20%
-    X_train, X_temp, y_train, y_temp = train_test_split(data, labels, test_size=0.4, random_state=42)
-    X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
+    # splits data to train 64%, val 16%, test 20%
+    X_train, X_temp, y_train, y_temp = train_test_split(data, labels, test_size=0.36, random_state=42)
+    X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.55, random_state=42)
     return [X_train, y_train, X_val, y_val, X_test, y_test]
 
 class RawData:
