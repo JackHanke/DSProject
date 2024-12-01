@@ -34,6 +34,5 @@ cd data && ./create_data.sh && cd ..
 
 5. View the exploratory data analysis by running through the Jupyter Notebook called `eda.ipynb`. This file shows the analysis conducted to write a representative data preprocessor. 
 
-
-6. TODO `main.ipynb`
+6. The `main.ipynb` file consists of modeling, feature importance, and more specific data preprocessing. 
 
